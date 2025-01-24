@@ -15,6 +15,19 @@ const connection = mysql.createConnection({
 });
 
 
+const dataCalzados = app.get('/api/calzados', (req, res) => {
+    const sql = 'SELECT * FROM Calzados';
+    connection.query(sql, (error, results) => {
+        if (error) {
+            res.send('Error al obtener los calzados');
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+console.log(dataCalzados)
+
 connection.connect((err) =>{
     if(err){
         console.log("Error para conectarse a la base de datos:", err);
