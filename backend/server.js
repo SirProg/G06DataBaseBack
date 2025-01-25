@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const connection = mysql.createConnection({
-    host: 'autorack.proxy.rlwy.net',
-    user: 'root',
-    password: 'lnhgcSobelSmKNAUnCfndnepWFMvbMLD',
-    database: 'G06',
+    host: "${{MySQL.MYSQLHOST}}",
+    user: "${{MySQL.MYSQLUSER}}",
+    password: "${{MySQL.MYSQLPASSWORD}}",
+    database: "${{MySQL.MYSQLDATABASE}}",
 });
 
 
@@ -76,7 +76,7 @@ connection.connect((err) =>{
 });
 
 
-const PORT = process.env.PORT || 11978;
+const PORT = process.env.PORT || "${{MySQL.MYSQLPORT}}";
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
