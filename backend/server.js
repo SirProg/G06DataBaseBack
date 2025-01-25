@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const connection = mysql.createConnection({
-    host: MYSQLHOST,
-    user: MYSQLUSER,
-    password: MYSQLPASSWORD,
-    database: MYSQLDATABASE,
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
 });
 
 //Obtener todos los calzados
@@ -79,7 +79,7 @@ connection.connect((err) =>{
 });
 
 
-const PORT = process.env.PORT || MYSQLPORT;
+const PORT = process.env.PORT || process.env.MYSQLPORT;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
