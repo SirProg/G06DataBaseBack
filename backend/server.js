@@ -14,7 +14,7 @@ const connection = mysql.createConnection({
     database: "${{MySQL.MYSQLDATABASE}}",
 });
 
-
+//Obtener todos los calzados
 app.get('/api/calzados', (req, res) => {
     const sql = 'SELECT * FROM Calzado';
     connection.query(sql, (error, results) => {
@@ -26,6 +26,7 @@ app.get('/api/calzados', (req, res) => {
     });
 });
 
+//Insertar un nuevo calzado
 app.post("/api/addCalzado", (req, res) => {
     const {id, talla, color, precio, tipo, nombre, existencias} = req.body;
     connection.query(
@@ -40,6 +41,7 @@ app.post("/api/addCalzado", (req, res) => {
         });
 });
 
+//Actualizar un calzado existente
 app.put('/api/updateCalzado/:id', (req, res) => {
     const {id} = req.params;
     const {talla, color, precio, tipo, nombre, existencias} = req.body;
@@ -54,6 +56,7 @@ app.put('/api/updateCalzado/:id', (req, res) => {
         });
 });
 
+//Eliminar un calzado con su respectivo id
 app.delete('/api/deleteCalzado/:id',(req, res) =>{
     const {id} = req.params;
     connection.query(
