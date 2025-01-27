@@ -59,14 +59,25 @@ app.put('/api/updateCalzado/:id', (req, res) => {
 //Eliminar un calzado con su respectivo id
 app.delete('/api/deleteCalzado/:id',(req, res) =>{
     const {id} = req.params;
+
+    if (isNaN(id)) {
+        return res.status(400).json({ error: "El ID proporcionado no es válido" });
+    }
+
     connection.query(
         'DELETE FROM Calzado WHERE IDCalzado = ?',
         [id],
-        (err)=>{
-            if(err){
-                res.status(500).json({error: "Error para eliminar el calzado"});
+        (err, result)=>{
+            if (err) {
+                console.error(err);
+                return res.status(500).json({ error: "Error al eliminar el calzado" });
             }
-            res.json({message: "Calzado eliminado exitosamente"});
+
+            if (result.affectedRows === 0) {
+                return res.status(404).json({ error: "No se encontró el calzado con el ID proporcionado" });
+            }
+
+             res.json({ message: "Calzado eliminado exitosamente" });
         });
 });
 
